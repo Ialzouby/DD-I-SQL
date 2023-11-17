@@ -1,0 +1,99 @@
+1. 
+
+SELECT CustomerName, Address, City, State, Zip
+FROM Customers;
+
+2. 
+
+SELECT CustomerName, PhoneNumber
+FROM Customers
+WHERE State = 'GA';
+
+
+3. 
+
+SELECT CustomerName, Zip
+FROM Customers
+WHERE State IN ('NC', 'SC'); ****
+
+
+4. 
+
+SELECT Items.Title, Items.Artist, Orders.OrderDate, Orders.ShipDate
+FROM OrderDetails
+JOIN Orders ON OrderDetails.OrderID = Orders.OrderID
+JOIN Items ON OrderDetails.ItemID = Items.ItemID;
+
+
+5. 
+
+SELECT ItemID, Title, Artist, UnitPrice, OnHand
+FROM Items
+ORDER BY UnitPrice;
+
+6. 
+
+SELECT ItemID, Title, Artist, UnitPrice, OnHand
+FROM Items
+WHERE UnitPrice > 100.00;
+
+
+7. 
+
+SELECT ItemID, Title, Artist, UnitPrice, OnHand
+FROM Items
+WHERE OnHand > 300;
+
+8. 
+
+SELECT Title, UnitPrice, UnitPrice * 2 AS RetailPrice
+FROM Items;
+
+
+
+
+9. 
+SELECT Customers, PhoneNumber 
+FROM Customers 
+WHERE OrderDate BETWEEN '2014-01-01' AND '2014-12-31';
+
+
+10. 
+
+SELECT Items.Artist, SUM(OrderDetails.Quantity) AS TotalSold
+FROM Items
+JOIN OrderDetails ON Items.ItemID = OrderDetails.ItemID
+GROUP BY Items.Artist;
+
+11. 
+
+SELECT Title
+FROM Items
+WHERE UnitPrice BETWEEN 40.00 AND 100.00;
+
+12. 
+
+SELECT Customers.CustomerName, Items.Title, Items.Artist, OrderDetails.Quantity
+FROM Customers
+JOIN Orders ON Customers.CustomerID = Orders.CustomerID
+JOIN OrderDetails ON Orders.OrderID = OrderDetails.OrderID
+JOIN Items ON OrderDetails.ItemID = Items.ItemID;
+
+
+13. 
+
+SELECT Customers.CustomerName, SUM(OrderDetails.Quantity * Items.UnitPrice * 2) AS TotalRevenue
+FROM Customers
+JOIN Orders ON Customers.CustomerID = Orders.CustomerID
+JOIN OrderDetails ON Orders.OrderID = OrderDetails.OrderID
+JOIN Items ON OrderDetails.ItemID = Items.ItemID
+GROUP BY Customers.CustomerName;
+
+
+14. 
+
+SELECT State, COUNT(*) AS NumberOfCustomers
+FROM Customers
+GROUP BY State;
+
+
